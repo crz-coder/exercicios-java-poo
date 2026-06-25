@@ -94,8 +94,12 @@ public class BancoEx {
                             System.out.println("Se desejar voltar ao menu digite 1, se preferir sair, digite 7: ");
                             opcao = sc.nextInt();
                         }
+                        continue;
+                    case 7:
+                        System.out.println("Muito obrigado!");
+                        continue;
                     default:
-                        System.out.println("Opção inválida.");
+                        System.out.println("Opção inválida!");
                 }
 
             } while (opcao != 7);
