@@ -27,31 +27,31 @@ public class Carro {
         System.out.println("8 - Sair");
     }
     public void acelerar(){
-        if (ligado == true) {
-            if (marcha == 0) {
+        if (ligado) {
+            if ((marcha == 0) && (velocidade == 0)) {
                 System.out.println("Ponto Morto!");
                 return;
-            } else if (marcha == 1) {
+            } else if ((marcha == 1) && (velocidade >= 0)) {
                 if (velocidade < 20) {
                     this.velocidade = ++velocidade;
                 }
-            } else if (marcha == 2) {
+            } else if ((marcha == 2) && (velocidade >= 20)) {
                 if (velocidade < 40) {
                     this.velocidade = ++velocidade;
                 }
-            } else if (marcha == 3) {
+            } else if ((marcha == 3) && (velocidade >= 40)) {
                 if (velocidade < 60) {
                     this.velocidade = ++velocidade;
                 }
-            } else if (marcha == 4) {
+            } else if ((marcha == 4) && (velocidade > 60)) {
                 if (velocidade < 80) {
                     this.velocidade = ++velocidade;
                 }
-            } else if (marcha == 5) {
+            } else if ((marcha == 5) && (velocidade >= 80)) {
                 if (velocidade < 100) {
                     this.velocidade = ++velocidade;
                 }
-            } else if (marcha == 6) {
+            } else if ((marcha == 6) && (velocidade >= 100)) {
                 if (velocidade < 120) {
                     this.velocidade = ++velocidade;
                 }
@@ -94,21 +94,32 @@ public class Carro {
         } else  System.out.println("Carro desligado!");
     }
     public void subirMarcha(){
-        if ((marcha < 6) && (ligado == true)) {
+        if ((marcha == 0) && (velocidade == 0) && (ligado)) {
+            this.marcha = 1;
+            this.velocidade = 1;
+            System.out.println("Aumentou a marcha! Marcha: " + this.marcha);
+            System.out.println();
+        } else if ((marcha < 6) && (ligado) && (velocidade == marcha * 20)){
             this.marcha = ++marcha;
-        }
-        System.out.println("Aumentou a marcha! Marcha: " + this.marcha);
-        System.out.println();
+            System.out.println("Aumentou a marcha! Marcha: " + this.marcha);
+            System.out.println();
+        } else System.out.println("Velocidade incompatível!");
     }
     public void descerMarcha(){
-        if ((marcha >= 0) && (ligado == true)){
+        if ((marcha == 1) && (ligado) && (velocidade < 1)) {
             this.marcha = --marcha;
-        }
-        System.out.println("Diminuiu a marcha! Marcha: " + this.marcha);
-        System.out.println();
+            System.out.println("Diminuiu a marcha! Marcha: " + this.marcha);
+            System.out.println();
+        } else if ((marcha > 1) && (ligado)) {
+                if (velocidade >= marcha * 10) {
+                    this.marcha = --marcha;
+                    System.out.println("Diminuiu a marcha! Marcha: " + this.marcha);
+                    System.out.println();
+                }
+            } else System.out.println("Velocidade incompatível!");
     }
     public void virarDireita (){
-        if (ligado == true) {
+        if (ligado) {
             if ((velocidade >= 1) && (velocidade <= 40)) {
                 System.out.println("Você virou a direita!");
                 System.out.println();
@@ -119,7 +130,7 @@ public class Carro {
         } else System.out.println("Carro desligado!");
     }
     public void virarEsquerda(){
-        if (ligado == true) {
+        if (ligado) {
             if ((marcha >= 1) && (marcha <= 2)) {
                 System.out.println("Você virou a esquerda!");
                 System.out.println();
@@ -130,7 +141,7 @@ public class Carro {
         } else System.out.println("Carro desligado!");
     }
     public void ligarDesligar(){
-        if (ligado == false){
+        if (!ligado){
             this.ligado = true;
             System.out.println("Carro Ligado!");
             System.out.println();
